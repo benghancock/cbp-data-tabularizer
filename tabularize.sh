@@ -21,7 +21,7 @@ sed -E '/^[A-Z]+\s?[A-Z]+?$|^\s$/d' $list |
     cat -s |
     # put cities, states, and ZIP codes on their own line
     sed -E 's/^([a-zA-Z].*), ([A-Z]{2}) ([[:digit:]]{5,}-?[[:digit:]]+?)$/\1\n\2\n\3/g' |
-    # put phone and fax numbers on their own line
+    # strip leading "Phone:" and "Fax:" text
     sed -E 's/^[a-zA-Z]{3,5}: (\([[:digit:]]{3}\) [[:digit:]]{3}-[[:digit:]]{4})/\1/g' |
     # pipe to awk and output to file, with fields separated by tabs
     awk 'BEGIN { RS="" ; FS="\n" ; OFS="\t" }{ $1=$1; print $0 }' > output.tsv
